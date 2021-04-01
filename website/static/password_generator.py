@@ -7,7 +7,8 @@ def get_available_chars(checkbox_statuses):
         'uppercase': 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
         'lowercase': 'abcdefghijklmnopqrstuvwxyz',
         'numbers'  : '0123456789',
-        'symbols'  : r'!@#$%^&*()-=_+<>,./?;:\'"[]{}\|'
+        'symbols'  : '!@#$%^&*-=_+?',
+        'ambiguous': '{}[]()/\\|\'"`~,;:.<>'
         }
     available_chars = ''
     
@@ -16,6 +17,7 @@ def get_available_chars(checkbox_statuses):
     available_chars += char_groups['lowercase'] if checkbox_statuses[1] else ''
     available_chars += char_groups['numbers']   if checkbox_statuses[2] else ''
     available_chars += char_groups['symbols']   if checkbox_statuses[3] else ''
+    available_chars += char_groups['ambiguous'] if not checkbox_statuses[4] else ''
 
     return available_chars
 

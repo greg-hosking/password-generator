@@ -17,7 +17,7 @@
   }
 </script>
 <style>
-  .checkbox-lg .custom-control-label::before, 
+  .checkbox-lg .custom-control-label::before,
   .checkbox-lg .custom-control-label::after {
     top: .8rem;
     width: 1.55rem;
@@ -36,32 +36,32 @@
     <div class="form-group row">
       <div class="h4 col-sm-10">Password Length</div>
       <div class="col-sm-2">
-        <select class="custom-select custom-select-md" id="password-length-select" name="password-length-select" >
+        <select class="custom-select custom-select-md" id="password-length-select" name="password-length-select">
           <optgroup label="Weak">
             {% for i in range(6, 16) %}
-              {% if selected_length == i %}
-                <option value="{{i}}" selected>{{i}}</option>
-              {% else %}
-                <option value="{{i}}">{{i}}</option>
-              {% endif %}
+            {% if selected_length == i %}
+            <option value="{{i}}" selected>{{i}}</option>
+            {% else %}
+            <option value="{{i}}">{{i}}</option>
+            {% endif %}
             {% endfor %}
           </optgroup>
           <optgroup label="Strong">
             {% for i in range(16, 65) %}
-              {% if selected_length == i %}
-                <option value="{{i}}" selected>{{i}}</option>
-              {% else %}
-                <option value="{{i}}">{{i}}</option>
-              {% endif %}
+            {% if selected_length == i %}
+            <option value="{{i}}" selected>{{i}}</option>
+            {% else %}
+            <option value="{{i}}">{{i}}</option>
+            {% endif %}
             {% endfor %}
           </optgroup>
           <optgroup label="Unbelievable">
             {% for i in range(7, 12) %}
-              {% if selected_length == 2**i %}
-                <option value="{{2**i}}" selected>{{2**i}}</option>
-              {% else %}
-                <option value="{{2**i}}">{{2**i}}</option>
-              {% endif %}
+            {% if selected_length == 2**i %}
+            <option value="{{2**i}}" selected>{{2**i}}</option>
+            {% else %}
+            <option value="{{2**i}}">{{2**i}}</option>
+            {% endif %}
             {% endfor %}
           </optgroup>
         </select>
@@ -73,9 +73,9 @@
       <div class="col-sm-1">
         <div class="custom-control custom-checkbox checkbox-lg">
           {% if checkbox_statuses[0] %}
-            <input type="checkbox" class="custom-control-input" id="checkbox-1" name="checkbox-1" checked>
+          <input type="checkbox" class="custom-control-input" id="checkbox-1" name="checkbox-1" checked>
           {% else %}
-            <input type="checkbox" class="custom-control-input" id="checkbox-1" name="checkbox-1">
+          <input type="checkbox" class="custom-control-input" id="checkbox-1" name="checkbox-1">
           {% endif %}
           <label class="custom-control-label" for="checkbox-1"></label>
         </div>
@@ -123,17 +123,35 @@
         </div>
       </div>
     </div>
+    <!-- "Exclude Ambiguous Symbols" Row -->
+    <div class="form-group row">
+      <div class="h4 col-sm-10 pt-2">Exclude Ambiguous Symbols</div>
+      <div class="col-sm-1">
+        <div class="custom-control custom-checkbox checkbox-lg">
+          {% if checkbox_statuses[4] %}
+          <input type="checkbox" class="custom-control-input" id="checkbox-5" name="checkbox-5" checked>
+          {% else %}
+          <input type="checkbox" class="custom-control-input" id="checkbox-5" name="checkbox-5">
+          {% endif %}
+          <label class="custom-control-label" for="checkbox-5"></label>
+        </div>
+      </div>
+    </div>
     <!-- "Generate Password" Button -->
     <div class="form-group row">
-      <button class="btn btn-primary col-sm-11 ml-3 mt-3" type="submit"><h5>Generate Password</h5></button>
+      <button class="btn btn-primary col-sm-11 ml-3 mt-3" type="submit">
+        <h5>Generate Password</h5>
+      </button>
     </div>
   </form>
 
   <!-- Password Text Box and Copy Button -->
   <form>
     <div class="form-group row">
-      <input class="form-control col-sm-11 col-md-9 col-lg-9 ml-3" type="text" id="password-textbox" name="password-textbox" value="{{password}}">
-      <button class="btn btn-primary col-sm-11 col-md-2 col-lg-2 ml-3 ml-md-0 ml-lg-0" type="button" onclick="copyToClipboard()">Copy</button>
+      <input class="form-control col-sm-11 col-md-9 col-lg-9 ml-3" type="text" id="password-textbox"
+        name="password-textbox" value="{{password}}">
+      <button class="btn btn-primary col-sm-11 col-md-2 col-lg-2 ml-3 ml-md-0 ml-lg-0" type="button"
+        onclick="copyToClipboard()">Copy</button>
     </div>
   </form>
 </div>
