@@ -1,21 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
-<script>
-  function copyToClipboard() {
-    // Get the text field
-    let passwordTextbox = document.getElementById("password-textbox");
-
-    // Select the text field
-    passwordTextbox.select();
-    passwordTextbox.setSelectionRange(0, 99999); // For mobile devices
-
-    // Copy the text inside the text field
-    document.execCommand("copy");
-
-    // Alert the copied text
-    alert("Copied the text: " + passwordTextbox.value);
-  }
-</script>
+<!-- Additional scripts for the page -->
+<script src="{{ url_for('static', filename='/javascript/generate_password.js') }}"></script>
+<script src="{{ url_for('static', filename='/javascript/copy_to_clipboard.js') }}"></script>
+<!-- Additional style rules for the page -->
 <style>
   .checkbox-lg .custom-control-label::before,
   .checkbox-lg .custom-control-label::after {
@@ -31,7 +19,7 @@
 </style>
 
 <div class="container">
-  <form method="POST">
+  <form id="password-form">
     <!-- "Password Length" Row -->
     <div class="form-group row">
       <div class="h4 col-sm-10">Password Length</div>
@@ -39,29 +27,21 @@
         <select class="custom-select custom-select-md" id="password-length-select" name="password-length-select">
           <optgroup label="Weak">
             {% for i in range(6, 16) %}
-            {% if selected_length == i %}
-            <option value="{{i}}" selected>{{i}}</option>
-            {% else %}
             <option value="{{i}}">{{i}}</option>
-            {% endif %}
             {% endfor %}
           </optgroup>
           <optgroup label="Strong">
             {% for i in range(16, 65) %}
-            {% if selected_length == i %}
-            <option value="{{i}}" selected>{{i}}</option>
-            {% else %}
-            <option value="{{i}}">{{i}}</option>
-            {% endif %}
+              {% if i == 16 %}
+                <option value="{{i}}" selected>{{i}}</option>
+              {% else %}
+                <option value="{{i}}">{{i}}</option>
+              {% endif %}
             {% endfor %}
           </optgroup>
           <optgroup label="Unbelievable">
             {% for i in range(7, 12) %}
-            {% if selected_length == 2**i %}
-            <option value="{{2**i}}" selected>{{2**i}}</option>
-            {% else %}
             <option value="{{2**i}}">{{2**i}}</option>
-            {% endif %}
             {% endfor %}
           </optgroup>
         </select>
@@ -72,11 +52,7 @@
       <div class="h4 col-sm-10 pt-2">Include Uppercase Letters</div>
       <div class="col-sm-1">
         <div class="custom-control custom-checkbox checkbox-lg">
-          {% if checkbox_statuses[0] %}
           <input type="checkbox" class="custom-control-input" id="checkbox-1" name="checkbox-1" checked>
-          {% else %}
-          <input type="checkbox" class="custom-control-input" id="checkbox-1" name="checkbox-1">
-          {% endif %}
           <label class="custom-control-label" for="checkbox-1"></label>
         </div>
       </div>
@@ -86,11 +62,7 @@
       <div class="h4 col-sm-10 pt-2">Include Lowercase Letters</div>
       <div class="col-sm-1">
         <div class="custom-control custom-checkbox checkbox-lg">
-          {% if checkbox_statuses[1] %}
           <input type="checkbox" class="custom-control-input" id="checkbox-2" name="checkbox-2" checked>
-          {% else %}
-          <input type="checkbox" class="custom-control-input" id="checkbox-2" name="checkbox-2">
-          {% endif %}
           <label class="custom-control-label" for="checkbox-2"></label>
         </div>
       </div>
@@ -100,11 +72,7 @@
       <div class="h4 col-sm-10 pt-2">Include Numbers</div>
       <div class="col-sm-1">
         <div class="custom-control custom-checkbox checkbox-lg">
-          {% if checkbox_statuses[2] %}
           <input type="checkbox" class="custom-control-input" id="checkbox-3" name="checkbox-3" checked>
-          {% else %}
-          <input type="checkbox" class="custom-control-input" id="checkbox-3" name="checkbox-3">
-          {% endif %}
           <label class="custom-control-label" for="checkbox-3"></label>
         </div>
       </div>
@@ -114,11 +82,7 @@
       <div class="h4 col-sm-10 pt-2">Include Symbols</div>
       <div class="col-sm-1">
         <div class="custom-control custom-checkbox checkbox-lg">
-          {% if checkbox_statuses[3] %}
           <input type="checkbox" class="custom-control-input" id="checkbox-4" name="checkbox-4" checked>
-          {% else %}
-          <input type="checkbox" class="custom-control-input" id="checkbox-4" name="checkbox-4">
-          {% endif %}
           <label class="custom-control-label" for="checkbox-4"></label>
         </div>
       </div>
@@ -128,18 +92,14 @@
       <div class="h4 col-sm-10 pt-2">Exclude Ambiguous Symbols</div>
       <div class="col-sm-1">
         <div class="custom-control custom-checkbox checkbox-lg">
-          {% if checkbox_statuses[4] %}
-          <input type="checkbox" class="custom-control-input" id="checkbox-5" name="checkbox-5" checked>
-          {% else %}
           <input type="checkbox" class="custom-control-input" id="checkbox-5" name="checkbox-5">
-          {% endif %}
           <label class="custom-control-label" for="checkbox-5"></label>
         </div>
       </div>
     </div>
     <!-- "Generate Password" Button -->
     <div class="form-group row">
-      <button class="btn btn-primary col-sm-11 ml-3 mt-3" type="submit">
+      <button class="btn btn-primary col-sm-11 ml-3 mt-3" type="button" onclick="generatePassword()">
         <h5>Generate Password</h5>
       </button>
     </div>
