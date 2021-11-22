@@ -4,8 +4,7 @@ function getAvailableChars(formData) {
         uppercase: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
         lowercase: "abcdefghijklmnopqrstuvwxyz",
         numbers  : "0123456789",
-        symbols  : "!@#$%^&*-=_+?",
-        ambiguous: "{}[]()/\\|'\"`~,;:.<>"
+        symbols  : "!@#$%^&*-=_+?{}[]()/\\|'\"`~,;:.<>",
     };
     availableChars = "";
 
@@ -14,7 +13,6 @@ function getAvailableChars(formData) {
     includeLowercase = formData.get("checkbox-2") == "on";
     includeNumbers   = formData.get("checkbox-3") == "on";
     includeSymbols   = formData.get("checkbox-4") == "on";
-    excludeAmbiguous = formData.get("checkbox-5") == "on";
 
     // Add the correct character groups to available chars based on form data    
     availableChars = (includeUppercase ? availableChars + charGroups.uppercase : 
@@ -25,8 +23,6 @@ function getAvailableChars(formData) {
                                          availableChars);
     availableChars = (includeSymbols   ? availableChars + charGroups.symbols   :
                                          availableChars);
-    availableChars = (excludeAmbiguous ? availableChars :
-                                         availableChars + charGroups.ambiguous);
 
     return availableChars;
 }
@@ -40,6 +36,11 @@ function generatePassword() {
 
     // Get the characters that the password should be made up of
     availableChars = getAvailableChars(formData);
+
+    if (availableChars == "") {
+        alert("Please check at least one of the boxes!");
+        return;
+    }
 
     // Generate the password
     password = "";

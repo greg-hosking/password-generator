@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html class="bg-dark mx-auto">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Password Generator</title>
+  <link rel="shortcut icon" type="image/jpg" href="images/favicon.ico">
+  <link rel="stylesheet" href="styles/main.css">
+
+  <script src="js/generatePassword.js"></script>
+  <script src="js/copyToClipboard.js"></script>
+
+  <!-- Bootstrap Setup -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    crossorigin="anonymous" />
+</head>
+
+<body class="mx-lg-5 mx-md-3 mx-sm-0 my-lg-5 my-md-3 my-sm-0">
+  <header>
+    <nav class="navbar bg-primary text-light shadow-lg">
+      <span class="p-5 w-100 navbar-brand">
+        <h1 class="font-weight-bold text-center text-wrap">Password Generator</h1>
+      </span>
+    </nav>
+  </header>
+
+  <div class="container py-5 px-lg-5 px-md-3 px-sm-0">
+    <form id="password-form">
+      <!-- "Password Length" Row -->
+      <div class="form-group row">
+        <div class="h4 col-sm-10">Password Length</div>
+        <div class="col-sm-2">
+          <select class="custom-select custom-select-md" id="password-length-select" name="password-length-select">
+            <optgroup label="Weak">
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+              <option value="13">13</option>
+              <option value="14">14</option>
+              <option value="15">15</option>
+            </optgroup>
+            <optgroup label="Strong">
+              <option value="16" selected>16</option>
+              <option value="17">17</option>
+              <option value="18">18</option>
+              <option value="19">19</option>
+              <option value="20">20</option>
+              <option value="21">21</option>
+              <option value="22">22</option>
+              <option value="23">23</option>
+              <option value="24">24</option>
+              <option value="25">25</option>
+              <option value="26">26</option>
+              <option value="27">27</option>
+              <option value="28">28</option>
+              <option value="29">29</option>
+              <option value="30">30</option>
+              <option value="31">31</option>
+              <option value="32">32</option>
+              <option value="33">33</option>
+              <option value="34">34</option>
+              <option value="35">35</option>
+              <option value="36">36</option>
+              <option value="37">37</option>
+              <option value="38">38</option>
+              <option value="39">39</option>
+              <option value="40">40</option>
+              <option value="41">41</option>
+              <option value="42">42</option>
+              <option value="43">43</option>
+              <option value="44">44</option>
+              <option value="45">45</option>
+              <option value="46">46</option>
+              <option value="47">47</option>
+              <option value="48">48</option>
+              <option value="49">49</option>
+              <option value="50">50</option>
+              <option value="51">51</option>
+              <option value="52">52</option>
+              <option value="53">53</option>
+              <option value="54">54</option>
+              <option value="55">55</option>
+              <option value="56">56</option>
+              <option value="57">57</option>
+              <option value="58">58</option>
+              <option value="59">59</option>
+              <option value="60">60</option>
+              <option value="61">61</option>
+              <option value="62">62</option>
+              <option value="63">63</option>
+            </optgroup>
+            <optgroup label="Unbelievable">
+              <option value="64">64</option>
+              <option value="128">128</option>
+              <option value="256">256</option>
+              <option value="512">512</option>
+              <option value="1024">1024</option>
+              <option value="2048">2048</option>
+            </optgroup>
+          </select>
+        </div>
+      </div>
+      <!-- "Include Uppercase Letters" Row -->
+      <div class="form-group row">
+        <div class="h4 col-sm-10 pt-2">Include Uppercase Letters</div>
+        <div class="col-sm-1">
+          <div class="custom-control custom-checkbox checkbox-lg">
+            <input type="checkbox" class="custom-control-input" id="checkbox-1" name="checkbox-1" checked>
+            <label class="custom-control-label" for="checkbox-1"></label>
+          </div>
+        </div>
+      </div>
+      <!-- "Include Lowercase Letters" Row -->
+      <div class="form-group row">
+        <div class="h4 col-sm-10 pt-2">Include Lowercase Letters</div>
+        <div class="col-sm-1">
+          <div class="custom-control custom-checkbox checkbox-lg">
+            <input type="checkbox" class="custom-control-input" id="checkbox-2" name="checkbox-2" checked>
+            <label class="custom-control-label" for="checkbox-2"></label>
+          </div>
+        </div>
+      </div>
+      <!-- "Include Numbers" Row -->
+      <div class="form-group row">
+        <div class="h4 col-sm-10 pt-2">Include Numbers</div>
+        <div class="col-sm-1">
+          <div class="custom-control custom-checkbox checkbox-lg">
+            <input type="checkbox" class="custom-control-input" id="checkbox-3" name="checkbox-3" checked>
+            <label class="custom-control-label" for="checkbox-3"></label>
+          </div>
+        </div>
+      </div>
+      <!-- "Include Symbols" Row -->
+      <div class="form-group row">
+        <div class="h4 col-sm-10 pt-2">Include Symbols</div>
+        <div class="col-sm-1">
+          <div class="custom-control custom-checkbox checkbox-lg">
+            <input type="checkbox" class="custom-control-input" id="checkbox-4" name="checkbox-4" checked>
+            <label class="custom-control-label" for="checkbox-4"></label>
+          </div>
+        </div>
+      </div>
+      <!-- "Generate Password" Button -->
+      <div class="form-group row">
+        <button class="btn btn-primary col-sm-11 ml-3 mt-3" type="button" onclick="generatePassword()">
+          <h5>Generate Password</h5>
+        </button>
+      </div>
+    </form>
+
+    <!-- Password Text Box and Copy Button -->
+    <form>
+      <div class="form-group row">
+        <input class="form-control col-sm-11 col-md-9 col-lg-9 ml-3" type="text" id="password-textbox"
+          name="password-textbox" value="">
+        <button class="btn btn-primary col-sm-11 col-md-2 col-lg-2 ml-3 ml-md-0 ml-lg-0" type="button"
+          onclick="copyToClipboard()">Copy</button>
+      </div>
+    </form>
+  </div>
+
+  <footer class="clearfix font-italic">
+    <div class="bg-primary text-light footer-copyright text-center py-3">
+      <h5>&copy; 2021, Greg Hosking</h5>
+    </div>
+  </footer>
+
+  <!-- Further Bootstrap and JavaScript Setup -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
